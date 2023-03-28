@@ -22,6 +22,9 @@ CORS(main, support_credentials=True)
 
 
 # ---------- Authentication routes ----------
+@app.route('/')
+def trial():
+ return "hello"
 
 
 

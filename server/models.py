@@ -15,6 +15,6 @@ class Users(db.Model):
     groupid=db.Column(db.String(200), nullable=False, unique=True)
     groupname=db.Column(db.String(200), nullable=False)
     adminname=db.Column(db.String(200), nullable=False)
-    # mobile=db.Column(db.Integer, nullable=False, unique=True)
-    # password=db.Column(db.String(200), nullable=False)
+    mobile=db.Column(db.Integer, nullable=False, unique=True)
+    password=db.Column(db.String(200), nullable=False)
     
