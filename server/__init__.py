@@ -2,7 +2,6 @@ from flask import Flask
 from flask_migrate import Migrate
 from .extensions import db
 from .commands import create_tables
-# from .models import Registergroup,Registermember
 from .routes import main
 
 def create_app(config_file='settings.py'):
