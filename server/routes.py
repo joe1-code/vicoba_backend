@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, g
 from .extensions import db
 from server.auth.register import register
 from server.auth.login import login
+from server.auth.reset import resetPassword
 from server.models import Users
 
 
@@ -29,5 +30,11 @@ def Userlogin():
  else:
   pass
 
-
+@main.route('/reset', methods=['POST', 'OPTIONS'])
+@cross_origin(support_credentials=True)
+def Resetpass():
+  if(request.method=='POST'):
+    return resetPassword(request, Users)
+  else:
+    pass
 
