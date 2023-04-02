@@ -6,17 +6,25 @@ import os
 import jwt
 
 
+def export_data(mobile):
+ phone=(f'mobile:{mobile}')
+ return jsonify({'mobile':phone})
+# phone={}
+# def export_data(mobile):
+#  global phone
+#  phone={'phone':mobile}
+#  return phone
+
 def resetPassword(request, Users):
- 
  data=json.loads(request.data)
  if data:
   #data from UI
-  mobile=data['phoneNo']
+  # mobile=data['phoneNo']
   usercode=data['code']
   newpassword=['password']
-
+  # print(mobile)
   #fetching encryted token from db
-  token = Users.query.with_entities(Users.code).filter_by(phoneNo=mobile).first()
+  token = Users.query.with_entities(Users.code).filter_by(phoneNo=mobilenumber).first()
   print("code:",token)
   #decrypt the token for comparison with usercode
   # newtoken=bytes(token, 'utf-8')
@@ -26,4 +34,4 @@ def resetPassword(request, Users):
   # except Exception as e:
   #  print(e)
   #  return ({'message':'failed to decrypt'})
-  return {"code":token.stringfy()}
+  return {}
