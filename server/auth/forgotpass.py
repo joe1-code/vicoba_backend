@@ -28,7 +28,7 @@ def forgotPassword(request, Users, db):
   
 
   #tokenlize the code
-  codetoken=jwt.encode({'id':exist_user.userid, 'exp':datetime.utcnow() + timedelta(seconds=int(os.environ.get('DURATION1'), base=0)), 'place':exist_user.place}, os.environ.get('SECRET_KEY'))
+  codetoken=jwt.encode({'id':exist_user.userid, 'exp':datetime.utcnow() + timedelta(seconds=int(os.environ.get('DURATION1'), base=0)), 'code':code}, os.environ.get('SECRET_KEY'))
   
 
   #post the code to db

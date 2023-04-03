@@ -31,13 +31,14 @@ def resetPassword(request, Users):
    try:
     # decoded = jwt.decode(newToken, 'SECRET_KEY', algorithms=['HS256'])
     payload = jwt.decode(newToken, os.environ.get('SECRET_KEY'), algorithms=['HS256'])
-    print(payload)
-    return ({'decrypted':payload})
+    print(payload['code'])
+
+    return ({'payload':payload})
    except Exception as e:
     print(e)
     return ({'message':'failed to decrypt'})
 
-   return (newToken)
+   return ()
 
   
   print(newToken)
