@@ -27,9 +27,11 @@ def forgotPassword(request, Users, db):
   code=random.randint(1000,9999)
   
 
-  #tokenlize the code
-  codetoken=jwt.encode({'id':exist_user.userid, 'exp':datetime.utcnow() + timedelta(seconds=int(os.environ.get('DURATION1'), base=0)), 'code':code}, os.environ.get('SECRET_KEY'))
-  
+  #Get the token lasting duration from the env. file
+  duration=int(os.environ.get('DURATION1',360))
+  expiration_time = datetime.utcnow() + timedelta(seconds=duration)
+  payload={'id':exist_user.userid, 'code':code}
+  codetoken = jwt.encode({'exp': expiration_time, **payload}, os.environ.get('SECRET_KEY'), algorithm='HS256')
 
   #post the code to db
   exist_user.code=codetoken

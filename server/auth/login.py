@@ -25,6 +25,6 @@ def login(request, Users):
   token=jwt.encode({'id':exist_user.userid, 'exp':datetime.utcnow() + timedelta(seconds=int(os.environ.get(
    'DURATION'), base=0)), 'phoneNo':exist_user.phoneNo}, os.environ.get('SECRET_KEY'))
 
-  return jsonify({'token':token})
+  return jsonify({'token':token}),200
 
  return jsonify({'message':'authorization is missing'}),403

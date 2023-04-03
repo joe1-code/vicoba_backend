@@ -18,30 +18,33 @@ def resetPassword(request, Users):
   usercode=data['code']
   newpassword=['password']
   #fetching encryted token from db
-  # token = Users.query.with_entities(Users.code).filter_by(phoneNo=mobilenumber).first()
   token=Users.query.filter_by(phoneNo=mobile).first()
   newToken=(f"{token.code}")
 
   if token:
    newToken=(f"{token.code}")
-   # print (newToken)
-   # print(usercode)
+   
    #decrypt the token for comparison with usercode
-   print("test")
    try:
     # decoded = jwt.decode(newToken, 'SECRET_KEY', algorithms=['HS256'])
-    payload = jwt.decode(newToken, os.environ.get('SECRET_KEY'), algorithms=['HS256'])
-    print(payload['code'])
+    auth_token = jwt.decode(newToken, os.environ.get('SECRET_KEY'), algorithms=['HS256'])
+    db_code=(auth_token['code'])
+    expireTime=(auth_token['exp'])
 
-    return ({'payload':payload})
+    # return ({'payload':expireTime})
+
    except Exception as e:
     print(e)
     return ({'message':'failed to decrypt'})
 
-   return ()
+   
+   #compare verification codes
+   if usercode==db_code:
+    return jsonify({'message':'verification successfully'}),200
+   else:
+    return jsonify({'message':'invalid code'}),401
+
 
   
-  print(newToken)
-  # newtoken=bytes(token, 'utf-8')
   
   return {}
