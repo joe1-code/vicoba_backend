@@ -4,19 +4,27 @@ from flask import jsonify
 from flask_jwt_extended import create_access_token,create_refresh_token
 import os
 import jwt
+from werkzeug.security import generate_password_hash
+from flask_session import Session
+
+
 
 def export_data(mobile):
  phone=(f'mobile:{mobile}')
  print(phone)
 
 
-def resetPassword(request, Users):
+def resetPassword(request, Users, db):
  data=json.loads(request.data)
  if data:
   #data from UI
   mobile=data['phoneNo']
-  usercode=data['code']
-  newpassword=['password']
+  user_code=data['code']
+  userpassword=['password']
+
+  #convert usercode from string datatype to integer datatype
+  usercode=int(user_code)
+
   #fetching encryted token from db
   token=Users.query.filter_by(phoneNo=mobile).first()
   newToken=(f"{token.code}")
@@ -37,12 +45,27 @@ def resetPassword(request, Users):
     print(e)
     return ({'message':'failed to decrypt'})
 
-   
+   #Check the datatype of the two codes to prevent comparatory errors
+   print(type(db_code))
+   print(type(usercode))
+
    #compare verification codes
    if usercode==db_code:
-    return jsonify({'message':'verification successfully'}),200
+   
+    #update the password
+    user=Users.query.filter_by(phoneNo=mobile).first()
+    print(userpassword)
+    #encrypt the password before updating the db
+    newpassword=''.join(userpassword).encode('utf-8')
+    print(newpassword)
+
+    user.password=newpassword
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({'message':' successfully updated password'}),200
    else:
     return jsonify({'message':'invalid code'}),401
+
 
 
   

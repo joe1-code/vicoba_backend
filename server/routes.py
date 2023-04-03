@@ -43,6 +43,6 @@ def Forgotpass():
 @cross_origin(support_credentials=True)
 def Resetpass():
   if(request.method=='POST'):
-    return resetPassword(request, Users)
+    return resetPassword(request, Users, db)
   else:
     pass

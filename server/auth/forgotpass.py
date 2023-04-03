@@ -37,6 +37,7 @@ def forgotPassword(request, Users, db):
   exist_user.code=codetoken
   db.session.add(exist_user)
   db.session.commit()
+  
   #import the module function that you will export the mobile data
   from server.auth.resetpass import export_data
  
