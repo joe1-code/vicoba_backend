@@ -11,16 +11,12 @@ from werkzeug.security import generate_password_hash
 
 class Group(db.Model):
 
-    __tablename__='Registergroup'
+    __tablename__='Group'
 
     id=db.Column(db.Integer, primary_key=True)
     groupid=db.Column(db.String(200), nullable=False, unique=True)
+    adminid=db.Column(db.String(200),nullable=False,unique=True)
     groupname=db.Column(db.String(200), nullable=False)
-    adminname=db.Column(db.String(200), nullable=False)
-    mobile=db.Column(db.Integer, nullable=False, unique=True)
-    password=db.Column(db.String(200), nullable=False)
-    confirmpass=db.Column(db.String(200), nullable=False)
-    title=db.Column(db.String(200), nullable=False)    
 
 class Users(db.Model):
 
