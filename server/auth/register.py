@@ -8,7 +8,9 @@ from werkzeug.security import generate_password_hash
 #create user id
 userid=uuid.uuid4()
 
-def register(data, db):
+def register(data, db, Users):
+ print("jjjjjjjjjjjjjjjjjjjj")
+ data=json.loads(request.data)
  fname=data['firstname']
  lname=data['lastname']
  mobile=data['phoneNo']
@@ -16,6 +18,8 @@ def register(data, db):
  passwd=data['password']
  location=data['place']
  title=data['title']
+
+ print(fname)
  #check if user exists
  existuser=Users.query.filter_by(phoneNo=mobile).first()
  if not existuser:

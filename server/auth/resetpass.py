@@ -11,7 +11,7 @@ from flask_session import Session
 
 def export_data(mobile):
  phone=(f'mobile:{mobile}')
- print(phone)
+#  print(phone)
 
 
 def resetPassword(request, Users, db):
@@ -20,10 +20,13 @@ def resetPassword(request, Users, db):
   #data from UI
   mobile=data['phoneNo']
   user_code=data['code']
-  userpassword=['password']
-
+  userpassword=data['password']
+  
   #convert usercode from string datatype to integer datatype
   usercode=int(user_code)
+
+  #encrypt the password before updating the db
+  newpassword=generate_password_hash(userpassword)
 
   #fetching encryted token from db
   token=Users.query.filter_by(phoneNo=mobile).first()
@@ -46,18 +49,16 @@ def resetPassword(request, Users, db):
     return ({'message':'failed to decrypt'})
 
    #Check the datatype of the two codes to prevent comparatory errors
-   print(type(db_code))
-   print(type(usercode))
+  #  print(type(db_code))
+  #  print(type(usercode))
 
    #compare verification codes
    if usercode==db_code:
    
     #update the password
     user=Users.query.filter_by(phoneNo=mobile).first()
-    print(userpassword)
-    #encrypt the password before updating the db
-    newpassword=''.join(userpassword).encode('utf-8')
-    print(newpassword)
+    # print(userpassword)
+    # print(newpassword)
 
     user.password=newpassword
     db.session.add(user)
