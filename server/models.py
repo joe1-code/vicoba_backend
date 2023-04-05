@@ -17,7 +17,7 @@ class Group(db.Model):
     groupid=db.Column(db.String(200), nullable=False, unique=True)
     adminid=db.Column(db.String(200),nullable=False,unique=True)
     groupname=db.Column(db.String(200), nullable=False)
-
+    totalmembers=db.Column(db.String(200), nullable=False)
 class Users(db.Model):
 
     __tablename__='Users'
