@@ -31,5 +31,6 @@ class Users(db.Model):
     password=db.Column(db.String(200), nullable=False)
     place=db.Column(db.String(200),nullable=False)
     title=db.Column(db.String(200),nullable=False)
+    role=db.Column(db.String(100), nullable=True)
     code=db.Column(db.String(200), nullable=True)
 

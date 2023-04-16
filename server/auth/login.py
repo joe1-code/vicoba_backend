@@ -23,7 +23,7 @@ def login(request, Users):
   #create token for the user
 
   token=jwt.encode({'id':exist_user.userid, 'exp':datetime.utcnow() + timedelta(seconds=int(os.environ.get(
-   'DURATION'), base=0)), 'phoneNo':exist_user.phoneNo}, os.environ.get('SECRET_KEY'))
+   'DURATION'), base=0)), 'role':exist_user.role}, os.environ.get('SECRET_KEY'))
 
   return jsonify({'token':token}),200
 

@@ -5,7 +5,7 @@ from server.auth.login import login
 from server.auth.forgotpass import forgotPassword
 from server.auth.resetpass import resetPassword
 from server.models import Users
-
+from server.helper import token_required_admin
 
 from flask_cors import CORS, cross_origin
 
@@ -16,6 +16,7 @@ CORS(main, support_credentials=True)
 # ---------- Authentication routes ----------
 @main.route('/register', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
+@token_required_admin
 def Reguser():
  if(request.method=='POST'):
   data=request.json
