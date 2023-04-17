@@ -99,16 +99,18 @@ def token_required_admin(f):
         token = parts[1]
         try:
 
-            data = jwt.decode(token, os.environ.get(
-                'SECRET_KEY'), algorithms="HS256")
+            data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms="HS256")
         
           # check if role is admin if not return error present in token
-
+            print(data)
             if not data['role'] =='admin':
                 return jsonify({"message": "you are neither an admin!"}, 403)
                 
         except jwt.ExpiredSignatureError as e:
             return jsonify({'message': 'Token has expired'})
+
+        except jwt.exceptions.InvalidSignatureError as e:
+            return jsonify({'message': 'Invalid Token'})
         return f(*args, **kwargs)
     return decorated
 
