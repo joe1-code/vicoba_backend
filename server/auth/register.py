@@ -18,13 +18,12 @@ def register(data, db):
  location=data['place']
  title=data['title']
 
- print(fname)
  #check if user exists
  existuser=Users.query.filter_by(phoneNo=mobile).first()
  if not existuser:
   try:
    passcode=generate_password_hash(passwd)
-   newuser=Users(userid=userid, firstname=fname, lastname=lname, phoneNo=mobile,   email=mail, password=passcode, place=location, title=title)
+   newuser=Users(userid=userid, firstname=fname, lastname=lname, phoneNo=mobile,   email=mail, password=passcode, place=location, title=title, role='user')
    db.session.add(newuser)
    db.session.commit()
    return jsonify({'message':'user registered successfully'}),200

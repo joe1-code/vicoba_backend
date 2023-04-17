@@ -4,6 +4,7 @@ from server.auth.register import register
 from server.auth.login import login
 from server.auth.forgotpass import forgotPassword
 from server.auth.resetpass import resetPassword
+from server.auth.registergroup import registerGroup
 from server.Admin.dashboard.newwindow import Registerwindow
 from server.models import Users
 from server.helper import token_required_admin
@@ -49,8 +50,18 @@ def Resetpass():
   else:
     pass
 
+@main.route('/registerGroup', methods=['POST', 'OPTIONS'])
+@cross_origin(support_credentials=True)
+def Reggroup():
+  if(request.method=='POST'):
+    data=request.json
+    return registerGroup(data, db)
+  else:
+    pass
+
 @main.route('/newwindow', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
+@token_required_admin
 def Regwindow():
   if(request.method=='POST'):
     data=request.json
