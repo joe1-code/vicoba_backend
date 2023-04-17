@@ -12,7 +12,6 @@ def login(request, Users):
  if data:
   username=data['phoneNo']
   password=data['password']
-  print(username, password)
 
   #check if user exists
   exist_user=Users.query.filter_by(phoneNo=username).first()
@@ -23,7 +22,7 @@ def login(request, Users):
   #create token for the user
 
   token=jwt.encode({'id':exist_user.userid, 'exp':datetime.utcnow() + timedelta(seconds=int(os.environ.get(
-   'DURATION'), base=0)), 'role':exist_user.role}, os.environ.get('SECRET_KEY'))
+   'DURATION1'), base=0)), 'role':exist_user.role}, os.environ.get('SECRET_KEY'))
 
   return jsonify({'token':token}),200
 
