@@ -23,7 +23,7 @@ def Registerwindow(data, db):
   newwind=Newwindow(windowid=windId, startdate=startdate,payamount=amount, durationOne=duration1,durationTwo=duration2, receivingpeople=receiver, total=total)
 
   for userid in participatorsId:
-   updatewindowid = Users.query.filter_by(windowid=userid['windowid']).first()
+   updatewindowid = Users.query.filter_by(userid=userid).first()
    updatewindowid.windowid=windId
    db.session.add(updatewindowid)
    db.session.commit()
