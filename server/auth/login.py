@@ -20,10 +20,12 @@ def login(request, Users):
    return jsonify({'message':'wrong credentials'}),401
 
   #create token for the user
+  duration=int(os.environ.get('DURATION1',360))
+  expiration_time = datetime.utcnow() + timedelta(seconds=duration)
+  payload={'id':exist_user.userid, 'role':exist_user.role, 'groupid':exist_user.groupid}
+  token = jwt.encode({'exp': expiration_time, **payload}, os.environ.get('SECRET_KEY'), algorithm='HS256')
 
-  token=jwt.encode({'id':exist_user.userid, 'exp':datetime.utcnow() + timedelta(seconds=int(os.environ.get(
-   'DURATION1'), base=0)), 'role':exist_user.role}, os.environ.get('SECRET_KEY'))
-
+  
   return jsonify({'token':token}),200
 
  return jsonify({'message':'authorization is missing'}),403

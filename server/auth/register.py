@@ -5,11 +5,13 @@ from flask import jsonify, g
 import uuid
 from werkzeug.security import generate_password_hash
 
-#create user id
-userid=uuid.uuid4()
 
 def register(data, db):
+ 
+ #create user id
+ userid=uuid.uuid4()
 
+ 
  fname=data['firstname']
  lname=data['lastname']
  mobile=data['phoneNo']

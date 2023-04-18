@@ -102,6 +102,7 @@ def token_required_admin(f):
             data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms="HS256")
           #add the userid to the global storage cache
             g.userid=data['id']
+            g.groupid=data['groupid']
           # check if role is admin if not return error present in token
             if not data['role'] =='admin':
                 return jsonify({"message": "you are neither an admin!"}, 403)
@@ -114,7 +115,18 @@ def token_required_admin(f):
         return f(*args, **kwargs)
     return decorated
 
+#-----------------------------serializer----------------------------------------
+def users_serializer(data):
+ return {
+        "fullname": data.firstname + " " + data.lastname,
+        "phoneNo": data.phoneNo,
+        "userid": data.userid,
+        "role": data.role
+        }
+            
 
+
+    
 
 
 
