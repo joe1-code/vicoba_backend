@@ -124,7 +124,13 @@ def users_serializer(data):
         "role": data.role
         }
             
-
+def apis_serializer(data):
+    return{
+        "firstname":data.firstname,
+        "lastname":data.lastname,
+        "userid":data.userid,
+        "role":data.role
+    }
 
     
 
