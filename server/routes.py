@@ -13,12 +13,13 @@ from server.helper import token_required_admin
 
 from flask_cors import CORS, cross_origin
 
+
 main=Blueprint('main', __name__)
 CORS(main, support_credentials=True)
 
 
 # ---------- Authentication routes ----------
-@main.route('/register', methods=['POST', 'OPTIONS'])
+@main.route('/registerUser', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
 @token_required_admin
 def Reguser():
@@ -35,6 +36,7 @@ def Userlogin():
   return login(request, Users)
  else:
   pass
+
 
 @main.route('/forgotpass', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
@@ -88,3 +90,7 @@ def Getdata():
     return fetchUser(Users)
   else:
     pass
+
+
+
+  

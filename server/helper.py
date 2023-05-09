@@ -108,7 +108,7 @@ def token_required_admin(f):
                 return jsonify({"message": "you are neither an admin!"}, 403)
                 
         except jwt.ExpiredSignatureError as e:
-            return jsonify({'message': 'Token has expired'})
+            return jsonify({'message': 'Token has expired'}),403
 
         except jwt.exceptions.InvalidSignatureError as e:
             return jsonify({'message': 'Invalid Token'})

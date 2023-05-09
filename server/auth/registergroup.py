@@ -10,7 +10,6 @@ from werkzeug.security import generate_password_hash
 #create group id & adminid
 groupId=uuid.uuid4()
 adminId=uuid.uuid4()
-userid=uuid.uuid4()
 
 def registerGroup(data, db):
  groupname=data['groupname']
@@ -30,12 +29,13 @@ def registerGroup(data, db):
 
  if not admin:
   try:
+   #generate hashed password
+   passcode=generate_password_hash(passwd)
+   Regadmin=Users(groupid=groupId, userid=adminId, firstname=fname, lastname=lname, phoneNo=mobile, email=mail, password=passcode, place=location, title=title, role='admin')
+
    #register a group to db
    newgroup=Group(groupid=groupId, adminid=adminId, groupname=groupname, totalmembers=totalmembers)
 
-   #generate hashed password
-   passcode=generate_password_hash(passwd)
-   Regadmin=Users(groupid=groupId, userid=userid, firstname=fname, lastname=lname, phoneNo=mobile, email=mail, password=passcode, place=location, title=title, role='admin')
 
    db.session.add(newgroup)
    db.session.add(Regadmin)
