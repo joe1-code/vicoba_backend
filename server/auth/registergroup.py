@@ -7,11 +7,13 @@ from flask import jsonify
 from werkzeug.security import generate_password_hash
 
 
-#create group id & adminid
-groupId=uuid.uuid4()
-adminId=uuid.uuid4()
+
 
 def registerGroup(data, db):
+ #create group id & adminid
+ groupId=uuid.uuid4()
+ adminId=uuid.uuid4()
+
  groupname=data['groupname']
  totalmembers=data['totalmembers']
  fname=data['firstname']
