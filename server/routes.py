@@ -19,7 +19,7 @@ CORS(main, support_credentials=True)
 
 
 # ---------- Authentication routes ----------
-@main.route('/registerUser', methods=['POST', 'OPTIONS'])
+@main.route('/members', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
 @token_required_admin
 def Reguser():
@@ -38,7 +38,7 @@ def Userlogin():
   pass
 
 
-@main.route('/forgotpass', methods=['POST', 'OPTIONS'])
+@main.route('/forgotpassword', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
 def Forgotpass():
   if(request.method=='POST'):
@@ -46,7 +46,7 @@ def Forgotpass():
   else:
     pass
 
-@main.route('/resetpass', methods=['POST', 'OPTIONS'])
+@main.route('/resetpassword', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
 def Resetpass():
   if(request.method=='POST'):

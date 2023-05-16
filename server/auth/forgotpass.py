@@ -15,12 +15,11 @@ def forgotPassword(request, Users, db):
  data=json.loads(request.data)
  if data:
   mobile=data['phoneNo']
-
   
   #check the user if exists
   exist_user=Users.query.filter_by(phoneNo=mobile).first()
   if not exist_user:
-   return jsonify({'message':'not a user'})
+   return jsonify({'message':'not a user','isSuccessful':False}),403
 
 
   #Generate code
@@ -28,7 +27,7 @@ def forgotPassword(request, Users, db):
   
 
   #Get the token lasting duration from the env. file
-  duration=int(os.environ.get('DURATION1',360))
+  duration=int(os.environ.get('DURATION1',900))
   expiration_time = datetime.utcnow() + timedelta(seconds=duration)
   payload={'id':exist_user.userid, 'code':code}
   codetoken = jwt.encode({'exp': expiration_time, **payload}, os.environ.get('SECRET_KEY'), algorithm='HS256')
@@ -44,5 +43,5 @@ def forgotPassword(request, Users, db):
   # Pass the form data to the export_data function
   export_data(mobile)
 
-  return jsonify({'message':code})
+  return jsonify({'code':code,'isSuccessful':True})
 

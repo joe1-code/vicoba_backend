@@ -19,7 +19,7 @@ def resetPassword(request, Users, db):
  if data:
   #data from UI
   mobile=data['phoneNo']
-  user_code=data['code']
+  user_code=data['userCode']
   userpassword=data['password']
   
   #convert usercode from string datatype to integer datatype
@@ -37,7 +37,6 @@ def resetPassword(request, Users, db):
    
    #decrypt the token for comparison with usercode
    try:
-    # decoded = jwt.decode(newToken, 'SECRET_KEY', algorithms=['HS256'])
     auth_token = jwt.decode(newToken, os.environ.get('SECRET_KEY'), algorithms=['HS256'])
     db_code=(auth_token['code'])
     expireTime=(auth_token['exp'])
@@ -63,7 +62,7 @@ def resetPassword(request, Users, db):
     user.password=newpassword
     db.session.add(user)
     db.session.commit()
-    return jsonify({'message':' successfully updated password'}),200
+    return jsonify({'message':' successfully updated password','isSuccessful':True}),200
    else:
     return jsonify({'message':'invalid code'}),401
 
