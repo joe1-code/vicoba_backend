@@ -7,6 +7,7 @@ def getUsers(Users):
  page=1
  
  groupId=g.groupid
+ print(groupId)
  
  profile=Users.query.filter_by(groupid=groupId)
  

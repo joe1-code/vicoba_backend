@@ -63,7 +63,7 @@ def Reggroup():
   else:
     pass
 
-@main.route('/newwindow', methods=['POST', 'OPTIONS'])
+@main.route('/regwindow', methods=['POST', 'OPTIONS'])
 @cross_origin(support_credentials=True)
 @token_required_admin
 def Regwindow():

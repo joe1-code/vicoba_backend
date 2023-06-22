@@ -18,6 +18,8 @@ def Registerwindow(data, db):
  duration2=data['durationTwo']
  participatorsId=data['participators']
 
+ print("users IDs from requests:",participatorsId)
+
  #post data to db
  try:
   newwind=Newwindow(windowid=windId, startdate=startdate,payamount=amount, durationOne=duration1,durationTwo=duration2, receivingpeople=receiver, total=total)
@@ -29,7 +31,7 @@ def Registerwindow(data, db):
    db.session.commit()
   
   db.session.add(newwind)
-  db.session.commit()
+  # db.session.commit()
 
   
   return ({'message':'new window registered'}),200

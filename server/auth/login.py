@@ -20,7 +20,7 @@ def login(request, Users):
    return jsonify({'message':'wrong credentials'}),401
 
   #create token for the user
-  duration=int(os.environ.get('DURATION1',900))
+  duration=int(os.environ.get('DURATION1',3600))
   expiration_time = datetime.utcnow() + timedelta(seconds=duration)
   payload={'id':exist_user.userid, 'role':exist_user.role, 'groupid':exist_user.groupid}
   token = jwt.encode({'exp': expiration_time, **payload}, os.environ.get('SECRET_KEY'), algorithm='HS256')
