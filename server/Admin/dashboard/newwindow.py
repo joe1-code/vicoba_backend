@@ -31,7 +31,7 @@ def Registerwindow(data, db):
    db.session.commit()
   
   db.session.add(newwind)
-  # db.session.commit()
+  db.session.commit()
 
   
   return ({'message':'new window registered'}),200

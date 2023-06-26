@@ -8,8 +8,9 @@ from server.auth.registergroup import registerGroup
 from server.Admin.dashboard.newwindow import Registerwindow
 from server.Admin.users import getUsers
 from server.Admin.APIs import fetchUser
+from server.Admin.dashboard.windowView import windowView
 from server.models import Users
-from server.helper import token_required_admin
+from server.helper import token_required_admin,token_required_user
 
 from flask_cors import CORS, cross_origin
 
@@ -55,7 +56,7 @@ def Resetpass():
     pass
 
 @main.route('/registerGroup', methods=['POST', 'OPTIONS'])
-@cross_origin(support_credentials=True)
+@cross_origin(support_credentials=True) 
 def Reggroup():
   if(request.method=='POST'):
     data=request.json
@@ -80,6 +81,16 @@ def Regwindow():
 def FetchUsers():
   if(request.method=='GET'):
     return getUsers(Users)
+  else:
+    pass
+
+
+@main.route('/windowdata', methods=['GET', 'OPTIONS'])
+@cross_origin(support_credentials=True)
+@token_required_user
+def WindData():
+  if(request.method == 'GET'):
+    return windowView(Users)
   else:
     pass
 
