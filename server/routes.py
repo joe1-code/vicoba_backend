@@ -10,6 +10,7 @@ from server.Admin.users import getUsers
 from server.Admin.APIs import fetchUser
 from server.Admin.dashboard.windowView import windowView
 from server.models import Users
+from server.models import Newwindow
 from server.helper import token_required_admin,token_required_user
 
 from flask_cors import CORS, cross_origin
@@ -90,7 +91,7 @@ def FetchUsers():
 @token_required_user
 def WindData():
   if(request.method == 'GET'):
-    return windowView(Users)
+    return windowView(Users, Newwindow)
   else:
     pass
 

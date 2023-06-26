@@ -8,7 +8,7 @@ from flask import jsonify
 windId=uuid.uuid4()
 
 def Registerwindow(data, db):
-
+ 
  #accept data from the UI
  startdate=data['startdate']
  amount=data['payamount']

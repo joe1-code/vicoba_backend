@@ -32,7 +32,6 @@ def token_required_user(f):
                 'SECRET_KEY'), algorithms="HS256")
 
             # add role and userid to flask global storage cache
-            print(data)
             g.userRole = data['role']
             g.userid = data['id']
             
