@@ -47,3 +47,4 @@ class Newwindow(db.Model):
     receivingpeople=db.Column(db.String(200), nullable=False)
     total=db.Column(db.String(200), nullable=True)
     durationTwo=db.Column(db.String(200), nullable=True)
+    groupid=db.Column(db.String(200),nullable=True)

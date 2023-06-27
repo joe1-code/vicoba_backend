@@ -71,7 +71,7 @@ def Reggroup():
 def Regwindow():
   if(request.method=='POST'):
     data=request.json
-    return Registerwindow(data, db)
+    return Registerwindow(data, db, Users)
   else:
     pass
 

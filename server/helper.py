@@ -32,7 +32,7 @@ def token_required_user(f):
                 'SECRET_KEY'), algorithms="HS256")
 
             # add role and userid to flask global storage cache
-            g.userRole = data['role']
+            g.groupid = data['groupid']
             g.userid = data['id']
             
             
@@ -99,7 +99,7 @@ def token_required_admin(f):
         try:
 
             data = jwt.decode(token, os.environ.get('SECRET_KEY'), algorithms="HS256")
-            print("yyyyyyyyyydddd",data['id'])
+           
           #add the userid to the global storage cache/object
             g.userid=data['id']
             g.groupid=data['groupid']

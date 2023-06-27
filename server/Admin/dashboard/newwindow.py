@@ -7,7 +7,7 @@ from flask import jsonify
 #create a windowid
 windId=uuid.uuid4()
 
-def Registerwindow(data, db):
+def Registerwindow(data, db, Users):
  
  #accept data from the UI
  startdate=data['startdate']
@@ -18,11 +18,20 @@ def Registerwindow(data, db):
  duration2=data['durationTwo']
  participatorsId=data['participators']
 
- print("users IDs from requests:",participatorsId)
+ #fetching the first element from an array
+ element = participatorsId[0]
+
+ #querying a group id from db
+ Info = Users.query.filter_by(userid = element).first()
+ groupID = Info.groupid
+ print("group id:", groupID)
+
+
+
 
  #post data to db
  try:
-  newwind=Newwindow(windowid=windId, startdate=startdate,payamount=amount, durationOne=duration1,durationTwo=duration2, receivingpeople=receiver, total=total)
+  newwind=Newwindow(windowid=windId, startdate=startdate,payamount=amount, durationOne=duration1,durationTwo=duration2, receivingpeople=receiver, total=total, groupid=groupID)
 
   for userid in participatorsId:
    updatewindowid = Users.query.filter_by(userid=userid).first()

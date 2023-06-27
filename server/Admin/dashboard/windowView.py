@@ -18,9 +18,9 @@ def windowView(Users, Newwindow):
 
  windData = Newwindow.query.filter_by(windowid = data).first()
  print(windData)
- # if windData:
- #  startdate = windData.startdate
- #  print("startCycle",startdate)
+ if windData:
+  startdate = windData.startdate
+  print("startCycle",startdate)
 
  return ({})
  #  data = [*map(window_serializer, profile)]
