@@ -12,11 +12,11 @@ def windowView(Users, Newwindow):
  profile = Users.query.filter_by(userid = userID).first()
  if profile:
  
-  data = profile.windowid
+  data = profile.groupid
   print("typooooooooooooo", data)
 
 
- windData = Newwindow.query.filter_by(windowid = data).first()
+ windData = Newwindow.query.filter_by(groupid = data).first()
  print(windData)
  if windData:
   startdate = windData.startdate
