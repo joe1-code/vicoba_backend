@@ -4,6 +4,7 @@ from flask import request, jsonify, g
 import jwt
 import os
 import random
+import datetime
 
 size = os.environ.get('TRACKING_ID_SIZE')
 
@@ -134,7 +135,13 @@ def apis_serializer(data):
 
 def window_serializer(data):
     return{
-        "windowID": data.windowid
+        "groupID": data.groupid
+    }
+
+def windview_serializer(data):
+    return{
+        "startdate":data.startdate.isoformat() if data.startdate else None,
+        "receivers":data.receivingpeople
     }
 
     
